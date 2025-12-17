@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../components/buttons";
+import Button from "../components/Buttons";
 function LandingPage() {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <span>Task</span>
-            <div className="btn" style={{display: 'flex',gap: '10px'}}>
+        <div className="flex flex-col items-center">
+            <span className="text-xl font-bold my-10 block">Task</span>
+            <div className="flex gap-4 justify-center mt-4">
               <Button
                 text="1"
                 color="blue"
@@ -23,7 +23,7 @@ function LandingPage() {
                 text="3"
                 color="green"
                 textColor='white'
-                onClick={() => navigate('/UseUseEffect')}
+                onClick={() => navigate('/UseEffect')}
               />
             </div>
         </div>

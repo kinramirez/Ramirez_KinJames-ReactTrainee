@@ -8,7 +8,7 @@ interface ButtonProps {
 function Button ({ text, color, textColor, onClick }: ButtonProps) {
     return (
         <button
-            className="btn"
+            className="w-20 h-20"
             style={{backgroundColor: color, color: textColor}}
             onClick={onClick}
         >
