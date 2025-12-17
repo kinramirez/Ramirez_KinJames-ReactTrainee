@@ -1,51 +1,62 @@
-import { useEffect, useState } from 'react';
 import BackButton from '../components/BackButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
+import { useEffect, useState, } from 'react';
+import Button from '../components/Buttons';
 
 function UseEffect() {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const [count, setCount] = useState(0);
   const navigate = useNavigate();
-
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
+    console.log(`Counter value changed to: ${count}`);
+    console.log(`The number is ${count % 2 === 0 ? 'even' : 'odd'}`);
+  }, [count]);
 
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const increment = () => {
+    setCount(prevCount => prevCount + 1);
+  };
+
+  const decrement = () => {
+    setCount(prevCount => prevCount - 1);
+  };
+
+  const isEven = count % 2 === 0;
 
   return (
     <div className="min-h-screen p-8 flex items-center justify-center">
-      <BackButton onClick={() => navigate('/')} />
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-          Window Resize Listener
+      <div className="bg-white rounded-lg shadow-xl p-12 max-w-md w-full">
+        <BackButton onClick={() => navigate('/')}/>
+        <h1 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+          Counter with useEffect
         </h1>
         
-        <p className="text-gray-600 mb-8 text-center">
-          Try resizing your browser window!
-        </p>
-
-        <div className="space-y-4">
-          <div className="bg-blue-50 rounded-lg p-6 text-center">
-            <div className="text-sm text-gray-600 mb-2">Width</div>
-            <div className="text-4xl font-bold text-blue-600">
-              {windowWidth}<span className="text-xl">px</span>
-            </div>
+        <div className="mb-8">
+          <div 
+            className={`text-8xl font-bold text-center py-8 rounded-lg transition-colors duration-300 ${
+              isEven ? 'text-red-500 bg-red-50' : 'text-green-500 bg-green-50'
+            }`}
+          >
+            {count}
           </div>
+          <p className="text-center text-gray-600 mt-4">
+            {isEven ? 'Even number' : 'Odd number'}
+          </p>
+        </div>
 
-          <div className="bg-purple-50 rounded-lg p-6 text-center">
-            <div className="text-sm text-gray-600 mb-2">Height</div>
-            <div className="text-4xl font-bold text-purple-600">
-              {windowHeight}<span className="text-xl">px</span>
-            </div>
-          </div>
+        <div className="flex gap-4">
+          <Button
+            text='Decrement'
+            color='blue'
+            textColor='white'
+            onClick={decrement}
+            className='rounded-lg flex-1 px-6 py-4 text-lg font-semibold'       
+          />
+          <Button
+            text='Increment'
+            color='blue'
+            textColor='white'
+            onClick={increment}
+            className='rounded-lg flex-1 px-6 py-4 text-lg font-semibold'
+          />
         </div>
       </div>
     </div>

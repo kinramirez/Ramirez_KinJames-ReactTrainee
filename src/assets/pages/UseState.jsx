@@ -35,6 +35,7 @@ function UseState() {
           color="white"
           textColor="black"
           onClick={() => setBgcolor('bg-white')}
+          className="border border-black"
         />
       </div>
     </div>
